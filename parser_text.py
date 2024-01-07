@@ -744,12 +744,20 @@ def get_guide():
         <th>Nội dung</th>
       </tr>
       <tr>
-        <td class="hightlight">sp.d65 info</td>
-        <td>lấy thông tin super</td>
-      </tr>
-      <tr>
         <td><span class="hightlight">user_name info</span><br/><i>ví dụ: abc123 info</i></td>
         <td>lấy thông tin tài khoản bất kỳ</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">super</span> hoặc <span class="hightlight">super tuần này</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của super tuần này</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">super hôm nay</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của super hôm nay</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">super hôm qua</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của super hôm qua</td>
       </tr>
       <tr>
         <td><span class="hightlight">master</span> hoặc <span class="hightlight">master tuần này</span></td>
@@ -776,12 +784,20 @@ def get_guide():
         <td style="text-align: left">lấy danh sách thắng thua của agent hôm qua</td>
       </tr>
       <tr>
+        <td><span class="hightlight">os super</span></td>
+        <td style="text-align: left">lấy danh sách tiền chưa xử lý của super</td>
+      </tr>
+      <tr>
         <td><span class="hightlight">os master</span></td>
         <td style="text-align: left">lấy danh sách tiền chưa xử lý của master</td>
       </tr>
       <tr>
         <td><span class="hightlight">os agent</span></td>
         <td style="text-align: left">lấy danh sách tiền chưa xử lý của agent</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">os member</span></td>
+        <td style="text-align: left">lấy danh sách tiền chưa xử lý của member</td>
       </tr>
       <tr>
         <td><span class="hightlight">member_name os bet</span><br/><i>ví dụ: abc123 os bet</i><br/><i>abc123 phải là hội viên</i></td>

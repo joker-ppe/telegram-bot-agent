@@ -14,6 +14,7 @@ baseUrl = "http://localhost:3004"
 
 
 async def fetch_url(session, url):
+    print("Fetching url: " + url)
     async with session.get(url, ssl=False) as response:
         if response.status == 200:
             return await response.json()
@@ -21,7 +22,10 @@ async def fetch_url(session, url):
             return ''
 
 async def get_user(from_date, end_date, yesterday, user_name):
-    url = f'{baseUrl}/super/user?super={SUPER_USER_NAME}&startDate={from_date}&endDate={end_date}&yesterday={yesterday}&userName={user_name}'
+    url = f'{baseUrl}/super/user?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'startDate={from_date}&endDate={end_date}&yesterday={yesterday}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         if (len(response) == 0):
@@ -46,7 +50,10 @@ async def get_user(from_date, end_date, yesterday, user_name):
 #         return response
 
 async def get_user_os_bet(end_date, user_name):
-    url = f'{baseUrl}/super/user/os_bet?super={SUPER_USER_NAME}&endDate={end_date}&userName={user_name}'
+    url = f'{baseUrl}/super/user/os_bet?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'endDate={end_date}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         if (len(response) == 0):
@@ -77,7 +84,10 @@ async def get_report_xsmb():
     return html_table
     
 async def get_masters(from_date, end_date):
-    url = f'{baseUrl}/super/masters?super={SUPER_USER_NAME}&startDate={from_date}&endDate={end_date}'
+    url = f'{baseUrl}/super/masters?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
@@ -86,7 +96,10 @@ async def get_masters(from_date, end_date):
         return response
     
 async def get_agents(from_date, end_date):
-    url = f'{baseUrl}/super/agents?super={SUPER_USER_NAME}&startDate={from_date}&endDate={end_date}'
+    url = f'{baseUrl}/super/agents?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
@@ -95,7 +108,10 @@ async def get_agents(from_date, end_date):
         return response
 
 async def get_members(from_date, end_date):
-    url = f'{baseUrl}/super/members?super={SUPER_USER_NAME}&startDate={from_date}&endDate={end_date}'
+    url = f'{baseUrl}/super/members?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
