@@ -1,0 +1,92 @@
+<html>
+  <body>
+    <head>
+      <style>
+        td,
+        th,
+        tr,
+        table {
+          border: 1px solid #000000;
+          border-collapse: collapse;
+          padding: 5px;
+        }
+
+        th {
+          background-color: #faebd7;
+        }
+
+        table td:nth-child(2) {
+          text-align: left;
+        }
+
+        table {
+          margin-left: auto;
+          margin-right: auto;
+          font-size: 25px;
+        }
+
+        body {
+          font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .hightlight {
+          color: orangered;
+        }
+      </style>
+    </head>
+    <table>
+      <tr>
+        <th>Cú pháp</th>
+        <th>Nội dung</th>
+      </tr>
+      <tr>
+        <td class="hightlight">sp.d65 info</td>
+        <td>lấy thông tin super</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">user_name info</span><br/><i>ví dụ: abc123 info</i></td>
+        <td>lấy thông tin tài khoản bất kỳ</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">master</span> hoặc <span class="hightlight">master tuần này</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của master tuần này</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">master hôm nay</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của master hôm nay</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">master hôm qua</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của master hôm qua</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">agent</span> hoặc <span class="hightlight">agent tuần này</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của agent tuần này</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">agent hôm nay</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của agent hôm nay</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">agent hôm qua</span></td>
+        <td style="text-align: left">lấy danh sách thắng thua của agent hôm qua</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">os master</span></td>
+        <td style="text-align: left">lấy danh sách tiền chưa xử lý của master</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">os agent</span></td>
+        <td style="text-align: left">lấy danh sách tiền chưa xử lý của agent</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">member_name os bet</span><br/><i>ví dụ: abc123 os bet</i><br/><i>abc123 phải là hội viên</i></td>
+        <td>lấy thông tin chi tiết cược của hội viên</td>
+      </tr>
+      <tr>
+        <td><span class="hightlight">xsmb</span></td>
+        <td>lấy kết quả xổ số miền Bắc</td>
+      </tr>
+    </table>
+  </body>
+</html>
