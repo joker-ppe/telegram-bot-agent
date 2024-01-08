@@ -208,7 +208,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_to_delete = await context.bot.send_message(chat_id, f'Em đã nhận thông tin và đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
     message_id = message_to_delete.message_id
 
-    if message_type == 'supergroup':
+    if message_type == 'supergroup' or message_type == 'group':
         if chat_id in group_white_list:
             if BOT_USER_NAME in text:
                 # message_to_delete = await context.bot.send_message(chat_id, 'Đang tổng hợp dữ liệu. Đợi em chút nhé')
