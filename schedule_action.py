@@ -83,7 +83,6 @@ async def send_notification_message(app: ContextTypes.DEFAULT_TYPE):
         pdfkit.from_string(response, f'{message_id}{chat_id}.pdf')
         with open(f'{message_id}{chat_id}.pdf', 'rb') as file:
             await app.bot.send_document(chat_id=chat_id, document=file)
-
         # Delete the image after sending
         os.remove(f'{message_id}{chat_id}.pdf')
 

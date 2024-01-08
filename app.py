@@ -225,7 +225,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
             response: str = await handle_response(text)
         else:
             print(chat_id)
-            # response: str = "Cút, mày không đủ tuổi nói chuyện với tao."
+            response: str = "Vui lòng kết nối với Trợ lý AI /start"
 
     else:
         # message_to_delete = await context.bot.send_message(chat_id, 'Đang tổng hợp dữ liệu. Đợi em chút nhé')
@@ -234,7 +234,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         print(f'id: {chat_id}')
 
         # response: str = await handle_response(text)
-        response: str = "Cút, mày không đủ tuổi nói chuyện với tao."
+        response: str = "Vui lòng kết nối với Trợ lý AI /start"
 
     # response: str = await handle_response(text)
 
@@ -305,9 +305,9 @@ if __name__ == '__main__':
     # job_minute = job_queue.run_repeating(callback_minute, interval=60, first=10)
 
     local_timezone = pytz.timezone('Asia/Bangkok')
-    target_time_admin_report = time(21, 37, 10, tzinfo=local_timezone)  # Set your time here
-    job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
-    target_time_master_report = time(21, 39, 10, tzinfo=local_timezone)  # Set your time here
+    # target_time_admin_report = time(21, 37, 10, tzinfo=local_timezone)  # Set your time here
+    # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
+    target_time_master_report = time(18, 37, 20, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
