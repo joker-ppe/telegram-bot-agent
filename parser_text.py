@@ -705,6 +705,7 @@ def get_guide():
     <html>
   <body>
     <head>
+       <meta charset="UTF-8">
       <style>
         td,
         th,
