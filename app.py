@@ -93,7 +93,13 @@ async def handle_response(text: str) -> str:
     elif detect_os_member(text_full):
         members = await get_members(from_date, end_date)
         return await send_table_os_image(members, 'Hội Viên')
-    
+    elif detect_super(text_full):
+        supers = await get_supers(from_date, end_date)
+        tmp_text = text_full.split(' ')
+        threshold = 0
+        if len(tmp_text) > 0:
+            threshold = tmp_text[len(tmp_text)-1]
+        return await send_table_image(supers, time_text, 'Cổ Đông', threshold)
     elif detect_master(text_full):
         threshold = 0
         tmp_text = text_full.split(' ')

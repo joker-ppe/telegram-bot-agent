@@ -82,6 +82,18 @@ async def get_report_xsmb():
     html_table += table.prettify()
     html_table += "</body></html>"
     return html_table
+
+async def get_supers(from_date, end_date):
+    url = f'{baseUrl}/super/supers?'
+    for super_user_name in SUPER_USER_NAME:
+        url += f'super={super_user_name}&'
+    url += f'startDate={from_date}&endDate={end_date}'
+    async with aiohttp.ClientSession() as session:
+        response = await fetch_url(session, url)
+        # print(response)
+        if (len(response) == 0):
+            return '***'
+        return response
     
 async def get_masters(from_date, end_date):
     url = f'{baseUrl}/super/masters?'
