@@ -83,7 +83,9 @@ async def handle_response(text: str) -> str:
     elif detect_guide(text_full):
         guide = get_guide()
         return guide
-    
+    elif detect_os_super(text_full):
+        supers = await get_supers(from_date, end_date)
+        return await send_table_os_image(supers, 'Cổ Đông')
     elif detect_os_master(text_full):
         masters = await get_masters(from_date, end_date)
         return await send_table_os_image(masters, 'Tổng Đại Lý')
