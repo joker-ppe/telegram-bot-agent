@@ -8,9 +8,9 @@ from settings import SUPER_USER_NAME
 from style import get_style
 
 
-# baseUrl = "http://3.1.5.108:3004"
+baseUrl = "http://3.1.5.108:3004"
 # baseUrl = "https://api.winwwin68.com"
-baseUrl = "http://localhost:3004"
+# baseUrl = "http://localhost:3004"
 
 
 async def fetch_url(session, url):

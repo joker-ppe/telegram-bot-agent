@@ -28,7 +28,11 @@ options = {
 
 async def start_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    await update.message.reply_text(f'{chat_id}')
+    if chat_id == GROUP_CHAT_ID:
+        await update.message.reply_text('Đã cấu hình thành công. Mời anh gõ `cú pháp` hoặc `hướng dẫn` để xem cách sử dụng.')
+    else:
+        await update.message.reply_text(f'Vui lòng gửi id sau cho kỹ thuật để kết nối với Trợ lý AI:')
+        await update.message.reply_text(f'{chat_id}')
 
 
 async def custom_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
