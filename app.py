@@ -203,7 +203,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_id = message_to_delete.message_id
 
     if message_type == 'supergroup':
-        print(chat_id)
+        
 
         if chat_id in group_white_list:
             if BOT_USER_NAME in text:
@@ -218,7 +218,8 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             response: str = await handle_response(text)
         else:
-            response: str = "Cút, mày không đủ tuổi nói chuyện với tao."
+            print(chat_id)
+            # response: str = "Cút, mày không đủ tuổi nói chuyện với tao."
 
     else:
         # message_to_delete = await context.bot.send_message(chat_id, 'Đang tổng hợp dữ liệu. Đợi em chút nhé')
