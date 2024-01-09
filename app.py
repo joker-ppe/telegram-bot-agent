@@ -1,6 +1,7 @@
 # import everything
 import asyncio
 import os
+import random
 import imgkit, pdfkit
 from datetime import datetime, timedelta, time
 from typing import Final
@@ -308,7 +309,9 @@ if __name__ == '__main__':
     local_timezone = pytz.timezone('Asia/Bangkok')
     # target_time_admin_report = time(21, 37, 10, tzinfo=local_timezone)  # Set your time here
     # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
-    target_time_master_report = time(18, 37, 20, tzinfo=local_timezone)  # Set your time here
+
+    second = random.randint(1, 60)
+    target_time_master_report = time(18, 40, second, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
