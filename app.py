@@ -45,10 +45,26 @@ async def wl_command(update: Update, context: ContextTypes.DEFAULT_TYPE):
     print('')
     # await update.message.reply_text(asyncio.run(main()))
 
+# Responses
+def check_time_and_send_notification():
+    # Đặt múi giờ nếu cần
+    timezone = pytz.timezone('Asia/Bangkok')
+    now = datetime.now(timezone)
+
+    current_hour = now.hour
+    current_minute = now.minute
+
+    # Kiểm tra xem thời gian hiện tại có nằm trong khoảng từ 18:32 đến 18:37 không
+    if current_hour == 18 and 32 <= current_minute <= 37:
+        return True
+    
+    return False
 
 # Responses
 
-async def handle_response(text: str) -> str:
+async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full_name: str,text: str) -> str:
+    message_id = ''
+
     text_full = text.replace(':', '').strip()
 
     today = datetime.now()
@@ -80,59 +96,109 @@ async def handle_response(text: str) -> str:
     if detect_report_xsmb(text_full):
         report = await get_report_xsmb()
         return report
-
-    elif detect_guide(text_full):
-        guide = get_guide()
-        return guide
     elif detect_os_super(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+        
         supers = await get_supers(from_date, end_date)
-        return await send_table_os_image(supers, 'Cổ Đông')
+        return await send_table_os_image(supers, 'Cổ Đông'), message_id
     elif detect_os_master(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         masters = await get_masters(from_date, end_date)
-        return await send_table_os_image(masters, 'Tổng Đại Lý')
+        return await send_table_os_image(masters, 'Tổng Đại Lý'), message_id
     elif detect_os_agent(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         agents = await get_agents(from_date, end_date)
-        return await send_table_os_image(agents, 'Đại Lý')
+        return await send_table_os_image(agents, 'Đại Lý'), message_id
     elif detect_os_member(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         members = await get_members(from_date, end_date)
-        return await send_table_os_image(members, 'Hội Viên')
+        return await send_table_os_image(members, 'Hội Viên'), message_id
     elif detect_super(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         supers = await get_supers(from_date, end_date)
         tmp_text = text_full.split(' ')
         threshold = 0
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text)-1]
-        return await send_table_image(supers, time_text, 'Cổ Đông', threshold)
+        return await send_table_image(supers, time_text, 'Cổ Đông', threshold), message_id
     elif detect_master(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         threshold = 0
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text)-1]
         masters = await get_masters(from_date, end_date)
-        return await send_table_image(masters, time_text, 'Tổng Đại Lý', threshold)
+        return await send_table_image(masters, time_text, 'Tổng Đại Lý', threshold), message_id
     elif detect_agent(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         threshold = 0
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text)-1]
         agents = await get_agents(from_date, end_date)
-        return await send_table_image(agents, time_text, 'Đại Lý', threshold)
+        return await send_table_image(agents, time_text, 'Đại Lý', threshold), message_id
     elif detect_member(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
         threshold = 0
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text)-1]
         members = await get_members(from_date, end_date)
-        return await send_table_image(members, time_text, 'Hội Viên', threshold)
+        return await send_table_image(members, time_text, 'Hội Viên', threshold), message_id
     else:
         text_full = text_full.split(' ')
 
         if len(text_full) == 1:
-            return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.'
+            return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.', ''
 
         info = text_full[0].strip().lower()
         processed: str = text.replace(info, '').lower().strip()
         if detect_member_info(processed):
+            if check_time_and_send_notification():
+                return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+            else:
+                message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+                message_id = message_to_delete.message_id
+
             yesterday = datetime.now() - timedelta(days=1)
             formatted_yesterday = yesterday.strftime('%Y-%m-%d')
 
@@ -147,8 +213,15 @@ async def handle_response(text: str) -> str:
 
             user = await get_user(from_date, end_date, formatted_yesterday, info)
             # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
-            return await send_table_user_image(user)
+            return await send_table_user_image(user), message_id
         elif detect_member_info_os_bet(processed):
+            if check_time_and_send_notification():
+                return 'Đang tính toán dữ liệu hôm nay. Anh vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+            else:
+                message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+                message_id = message_to_delete.message_id
+
+
             yesterday = datetime.now() - timedelta(days=1)
             formatted_yesterday = yesterday.strftime('%Y-%m-%d')
 
@@ -163,9 +236,9 @@ async def handle_response(text: str) -> str:
 
             user = await get_user_os_bet(end_date, info)
             # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
-            return await send_table_user_os_bet_image(user)
+            return await send_table_user_os_bet_image(user), message_id
         # elif detect_member_info_os_number(processed):
-        #     return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.'
+        #     return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.', ''
         #     yesterday = datetime.now() - timedelta(days=1)
         #     formatted_yesterday = yesterday.strftime('%Y-%m-%d')
 
@@ -182,7 +255,8 @@ async def handle_response(text: str) -> str:
         #     # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
         #     return await send_table_user_os_bet_image(user)
         else:
-            return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.'
+            return 'Không đúng cú pháp. Chúc anh một ngày tốt lành.', ''
+
 
 
 
@@ -208,8 +282,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     elif last_name is None:
         full_name = f'{first_name}'
 
-    message_to_delete = await context.bot.send_message(chat_id, f'Em đã nhận thông tin và đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
-    message_id = message_to_delete.message_id
+    # message_to_delete = await context.bot.send_message(chat_id, f'Em đã nhận thông tin và đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+    # message_id = message_to_delete.message_id
+    # message_to_delete = await context.bot.send_message(chat_id, f'Em đã nhận thông tin và đang tổng hợp dữ liệu. Anh {full_name} đợi em chút nhé')
+    message_id = ''
 
     if message_type == 'supergroup' or message_type == 'group':
         if chat_id in group_white_list:
@@ -223,7 +299,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 print('@' + update.effective_user.username)
                 # return
 
-            response: str = await handle_response(text)
+            response, message_id = await handle_response(context, chat_id, full_name, text)
         else:
             print(chat_id)
             response: str = "Vui lòng kết nối với Trợ lý AI /start"
@@ -270,8 +346,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     else:
         await update.message.reply_html(response)
 
-    # Delete the message
-    await context.bot.delete_message(chat_id=chat_id, message_id=message_id)
+    if message_id != '':
+        # Delete the message
+        await context.bot.delete_message(chat_id=chat_id, message_id=message_id)
 
 
 async def error(update: Update, context: ContextTypes.DEFAULT_TYPE):
@@ -311,7 +388,7 @@ if __name__ == '__main__':
     # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
 
     second = random.randint(1, 60)
-    target_time_master_report = time(18, 40, second, tzinfo=local_timezone)  # Set your time here
+    target_time_master_report = time(18, 37, second, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
