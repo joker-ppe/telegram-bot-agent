@@ -387,7 +387,7 @@ if __name__ == '__main__':
     # target_time_admin_report = time(21, 37, 10, tzinfo=local_timezone)  # Set your time here
     # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
 
-    second = random.randint(1, 60)
+    second = random.randint(1, 59)
     target_time_master_report = time(18, 37, second, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
