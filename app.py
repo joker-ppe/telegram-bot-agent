@@ -55,7 +55,7 @@ def check_time_and_send_notification():
     current_minute = now.minute
 
     # Kiểm tra xem thời gian hiện tại có nằm trong khoảng từ 18:32 đến 18:37 không
-    if current_hour == 18 and 32 <= current_minute <= 37:
+    if current_hour == 18 and 32 <= current_minute <= 40:
         return True
     
     return False
@@ -401,11 +401,11 @@ if __name__ == '__main__':
     # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
 
     second = random.randint(1, 59)
-    target_time_master_report = time(18, 37, second, tzinfo=local_timezone)  # Set your time here
+    target_time_master_report = time(18, 40, second, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
-    print(f"App for ${str(SUPER_USER_NAME)} running...")
+    print(f"App for {str(SUPER_USER_NAME)} running...")
 
      # Run the bot
     app.run_polling(poll_interval=1)
