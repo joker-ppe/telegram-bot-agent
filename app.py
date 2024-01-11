@@ -319,7 +319,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         # message_to_delete = await context.bot.send_message(chat_id, 'Đang tổng hợp dữ liệu. Đợi em chút nhé')
         # message_id = message_to_delete.message_id
         print(f'message_type: {message_type}')
-        print('@' + update.effective_user.username)
+        print('@' + str(update.effective_user.username))
         print(f'id: {chat_id}')
 
         # response: str = await handle_response(text)
@@ -405,7 +405,7 @@ if __name__ == '__main__':
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
-    print("App running...")
+    print(f"App for ${str(SUPER_USER_NAME)} running...")
 
      # Run the bot
     app.run_polling(poll_interval=1)
