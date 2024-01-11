@@ -344,7 +344,9 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
             # Delete the image after sending
             os.remove(f'{message_id}{chat_id}.jpg')
-        except Exception:
+        except Exception as e:
+            print(f'Error: {e}')
+
             pdfkit.from_string(response, f'{message_id}{chat_id}.pdf')
             with open(f'{message_id}{chat_id}.pdf', 'rb') as file:
                 await update.message.reply_document(file)
