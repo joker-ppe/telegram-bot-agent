@@ -307,7 +307,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
                 text: str = text.replace(BOT_USER_NAME, '').strip()
                 # response: str = await handle_response(new_text)
             else:
-                print('@' + update.effective_user.username)
+                print('@' + str(update.effective_user.username))
                 # return
 
             response, message_id = await handle_response(context, chat_id, full_name, text)
@@ -387,7 +387,7 @@ if __name__ == '__main__':
 
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
-    # app.add_error_handler(error)
+    app.add_error_handler(error)
 
     print("App setting up schedules...")
 
