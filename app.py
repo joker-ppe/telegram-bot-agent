@@ -94,12 +94,18 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
 
     # call api
     if detect_report_xsmb(text_full):
+        message_to_delete = await context.bot.send_message(chat_id, f'Đang lấy dữ liệu. Anh {full_name} đợi em chút nhé')
+        message_id = message_to_delete.message_id
+        
         report = await get_report_xsmb()
-        return report
+        return report, message_id
     
     elif detect_guide(text_full):
+        message_to_delete = await context.bot.send_message(chat_id, f'Đang lấy dữ liệu. Anh {full_name} đợi em chút nhé')
+        message_id = message_to_delete.message_id
+
         guide = get_guide()
-        return guide
+        return guide, message_id
 
     elif detect_os_super(text_full):
         if check_time_and_send_notification():
