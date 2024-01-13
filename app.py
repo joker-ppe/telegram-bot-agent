@@ -387,7 +387,7 @@ if __name__ == '__main__':
 
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
-    app.add_error_handler(error)
+    # app.add_error_handler(error)
 
     print("App setting up schedules...")
 
@@ -401,7 +401,7 @@ if __name__ == '__main__':
     # job_daily1 = job_queue.run_daily(send_notification, time=target_time_admin_report)
 
     second = random.randint(1, 59)
-    target_time_master_report = time(18, 40, second, tzinfo=local_timezone)  # Set your time here
+    target_time_master_report = time(18, 39, second, tzinfo=local_timezone)  # Set your time here
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
