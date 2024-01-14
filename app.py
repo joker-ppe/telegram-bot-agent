@@ -274,7 +274,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
 
 async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     chat_id = update.effective_chat.id
-    message_type: str = update.message.chat.type
+    message_type: str = str(update.message.chat.type)
     text: str = update.message.text
 
     # print('User @'+update.effective_user.username +'['+update.effective_user.first_name+' ' + update.effective_user.last_name+'] in ' + message_type + ": " + text)
