@@ -387,7 +387,7 @@ if __name__ == '__main__':
 
     app.add_handler(MessageHandler(filters.TEXT, handle_message))
 
-    # app.add_error_handler(error)
+    app.add_error_handler(error)
 
     print("App setting up schedules...")
 
