@@ -412,7 +412,8 @@ if __name__ == '__main__':
     job_daily2 = job_queue.run_daily(send_notification_message, time=target_time_master_report)
 
 
-    print(f"App for {str(SUPER_USER_NAME)} running...")
+    print(f"App for Super {str(SUPER_USER_NAME)} running...")
+    print(f"Filter Master {str(MASTER_USER_NAME)} running...")
 
      # Run the bot
     app.run_polling(poll_interval=1)

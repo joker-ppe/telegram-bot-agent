@@ -3,14 +3,14 @@ import aiohttp
 import asyncio
 from cloudscraper import CloudScraper
 from bs4 import BeautifulSoup
-from settings import SUPER_USER_NAME
+from settings import MASTER_USER_NAME, SUPER_USER_NAME
 
 from style import get_style
 
 
-baseUrl = "http://3.1.5.108:3004"
+# baseUrl = "http://3.1.5.108:3004"
 # baseUrl = "https://api.winwwin68.com"
-# baseUrl = "http://localhost:3004"
+baseUrl = "http://localhost:3004"
 
 
 async def fetch_url(session, url):
@@ -25,6 +25,8 @@ async def get_user(from_date, end_date, yesterday, user_name):
     url = f'{baseUrl}/super/user?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'startDate={from_date}&endDate={end_date}&yesterday={yesterday}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
@@ -53,6 +55,8 @@ async def get_user_os_bet(end_date, user_name):
     url = f'{baseUrl}/super/user/os_bet?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'endDate={end_date}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
@@ -87,6 +91,8 @@ async def get_supers(from_date, end_date):
     url = f'{baseUrl}/super/supers?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
@@ -99,6 +105,8 @@ async def get_masters(from_date, end_date):
     url = f'{baseUrl}/super/masters?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
@@ -111,6 +119,8 @@ async def get_agents(from_date, end_date):
     url = f'{baseUrl}/super/agents?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
@@ -123,6 +133,8 @@ async def get_members(from_date, end_date):
     url = f'{baseUrl}/super/members?'
     for super_user_name in SUPER_USER_NAME:
         url += f'super={super_user_name}&'
+    for master_user_name in MASTER_USER_NAME:
+        url += f'master={master_user_name}&'
     url += f'startDate={from_date}&endDate={end_date}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
