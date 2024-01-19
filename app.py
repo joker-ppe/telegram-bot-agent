@@ -285,8 +285,10 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
     message_type: str = str(update.message.chat.type)
     text: str = update.message.text
 
+    now = datetime.now()
+
     # print('User @'+update.effective_user.username +'['+update.effective_user.first_name+' ' + update.effective_user.last_name+'] in ' + message_type + ": " + text)
-    print(f'Input: {text} from ${str(update.effective_chat.title)}')
+    print(f'Input: "{text}" from "{str(update.effective_chat.title)}" at {now}')
 
     group_white_list = [
        GROUP_CHAT_ID
