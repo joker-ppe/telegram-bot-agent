@@ -241,6 +241,7 @@ async def send_table_user_image(json_data):
             name = children['full_name']
             outstanding = "{:,}".format(round(children['outstanding']))
             profit = "{:,}".format(round(children['profit']))
+            commission = "{:,}".format(round(children['commission']))
             
             profit_item = f"""
             <span class='lose'>{profit}</span>               
@@ -253,13 +254,13 @@ async def send_table_user_image(json_data):
                 html_table += f"""
     <tr>
         <td rowspan='{len(json_data['list_children'])}'>Tuyến dưới</td>
-        <td style='text-align: left;'>{name}<br/>wl: {profit_item}<br/>os: {outstanding}</td>
+        <td style='text-align: left;'>{name}<br/>wl: {profit_item}<br/>os: {outstanding}<br/>hh: {commission}</td>
     </tr>
     """             
             else:
                 html_table += f"""
     <tr>
-        <td style='text-align: left;'>{name}<br/>wl: {profit_item}<br/>os: {outstanding}</td>
+        <td style='text-align: left;'>{name}<br/>wl: {profit_item}<br/>os: {outstanding}<br/>hh: {commission}</td>
     </tr>
     """            
 
@@ -284,6 +285,20 @@ async def send_table_user_image(json_data):
 
     outstanding = "{:,}".format(round(json_data['outstanding']))
     html_table += f"<tr><td>Outstanding</td><td>{outstanding}</td></tr>"
+
+    commission = 0
+    if json_data['level'] == 1:
+        commission = json_data['companyCommission'] + json_data['adminCommission']
+    elif json_data['level'] == 2:
+        commission = json_data['superCommission']
+    elif json_data['level'] == 3:
+        commission = json_data['masterCommission']
+    elif json_data['level'] == 4:
+        commission = json_data['agentCommission']
+    
+    if json_data['level'] != 5:
+        commission = "{:,}".format(round(commission))
+        html_table += f"<tr><td>HH</td><td>{commission}</td></tr>"
 
     data_bet_keys = json_data['data_bet'].keys()
 
