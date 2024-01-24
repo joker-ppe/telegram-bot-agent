@@ -114,6 +114,16 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
 
         guide = get_guide()
         return guide, message_id
+    
+    elif detect_member_inactive(text_full):
+        if check_time_and_send_notification():
+            return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau khi có báo cáo tự động nhé ạ.', ''
+        else:
+            message_to_delete = await context.bot.send_message(chat_id, f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
+            message_id = message_to_delete.message_id
+
+        members = await get_members_inactive(from_date, end_date)
+        return await send_member_inactive(members, time_text), message_id
 
     elif detect_os_super(text_full):
         if check_time_and_send_notification():
@@ -339,7 +349,7 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
 
     # print('Bot:', response)
 
-    if '<tr><th>STT.</th><th>Thể loại</th><th>Số</th><th>Điểm</th><th>Tiền</th><th>Trả thưởng</th><th>Lợi nhuận</th></tr>' in response:
+    if '<tr><th>STT.</th><th>Thể loại</th><th>Số</th><th>Điểm</th><th>Tiền</th><th>Trả thưởng</th><th>Lợi nhuận</th></tr>' in response or '<title>pdf</title>' in response:
         pdfkit.from_string(response, f'{message_id}{chat_id}.pdf')
         with open(f'{message_id}{chat_id}.pdf', 'rb') as file:
             await update.message.reply_document(file)

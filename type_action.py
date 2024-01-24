@@ -82,6 +82,9 @@ def detect_report_xsmb(text):
     words = ['xổ số miền bắc', 'xo so mien bac', 'xsmb']
     return detect_action(text, words)
 
+def detect_member_inactive(text):
+    words = ['member ko cược', 'member không cược']
+    return detect_action(text, words)
 #////////////////////////////////////////////////////////////////
 def detect_yesterday(text):
     words = ['hôm qua', 'hom qua', 'hqua', 'hqa']
