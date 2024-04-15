@@ -91,13 +91,13 @@ async def send_table_image(json_data, time_text = 'tuần này', role='Cổ Đô
             else:
                 html_table += f"<tr><td>{index}</td><td>{full_name}</td><td class='lose' style='text-align: right;'>{profit:,}</td></tr>"
     else:
-        colspan = 3
-        html_table += "<tr><th>STT.</th><th>{}</th><th>Thầu</th><th>Thắng thua</th></tr>".format(role)
+        colspan = 2
+        html_table += "<tr><th>STT.</th><th>{}</th><th>Thắng thua</th></tr>".format(role)
         for index, (full_name, bid_percent, profit) in enumerate(data, start=1):
             if profit > 0:
-                html_table += f"<tr><td>{index}</td><td>{full_name}</td><td style='text-align: right;'>{bid_percent}</td><td class='win' style='text-align: right;'>{profit:,}</td></tr>"
+                html_table += f"<tr><td>{index}</td><td>{full_name}</td><td class='win' style='text-align: right;'>{profit:,}</td></tr>"
             else:
-                html_table += f"<tr><td>{index}</td><td>{full_name}</td><td style='text-align: right;'>{bid_percent}</td><td class='lose' style='text-align: right;'>{profit:,}</td></tr>"
+                html_table += f"<tr><td>{index}</td><td>{full_name}</td><td class='lose' style='text-align: right;'>{profit:,}</td></tr>"
        
     # Thêm hàng tổng
     if total > 0:
