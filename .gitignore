@@ -1,0 +1,10 @@
+
+.idea/vcs.xml
+.idea/inspectionProfiles/profiles_settings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/telegram-bot-agent.iml
+__pycache__/parser_text.cpython-312.pyc
+__pycache__/settings.cpython-312.pyc
+/__pycache__
+*.pyc

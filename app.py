@@ -19,9 +19,9 @@ from settings import *
 
 options = {
     'format': 'jpg',
-    'width': '600',
+    'width': '666',
     # Adjust the quality (0-100). Lower might reduce clarity.
-    'quality': '60',
+    'quality': '66',
     # Adjust width as per requirement
     # Other options as needed...
 }
@@ -234,7 +234,32 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
 
         info = text_full[0].strip().lower()
         processed: str = text.replace(info, '').lower().strip()
-        if detect_member_info(processed):
+
+        if detect_member_info_text(processed):
+            if check_time_and_send_notification():
+                return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''
+            else:
+                message_to_delete = await context.bot.send_message(chat_id,
+                                                                   f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
+                message_id = message_to_delete.message_id
+
+            yesterday = datetime.now() - timedelta(days=1)
+            formatted_yesterday = yesterday.strftime('%Y-%m-%d')
+
+            today = datetime.now()
+            # Calculate the number of days to subtract to get to Monday
+            # weekday() returns 0 for Monday, 1 for Tuesday, and so on
+            days_to_subtract = today.weekday()
+            monday = today - timedelta(days=days_to_subtract)
+            formatted_monday = monday.strftime('%Y-%m-%d')
+            from_date = formatted_monday
+            end_date = datetime.now().strftime('%Y-%m-%d')
+
+            user = await get_user(from_date, end_date, formatted_yesterday, info)
+            # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
+            return await send_table_user_text(user), message_id
+
+        elif detect_member_info(processed):
             if check_time_and_send_notification():
                 return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''
             else:
@@ -257,6 +282,32 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
             user = await get_user(from_date, end_date, formatted_yesterday, info)
             # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
             return await send_table_user_image(user), message_id
+
+        elif detect_member_config(processed):
+            if check_time_and_send_notification():
+                return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''
+            else:
+                message_to_delete = await context.bot.send_message(chat_id,
+                                                                   f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
+                message_id = message_to_delete.message_id
+
+            yesterday = datetime.now() - timedelta(days=1)
+            formatted_yesterday = yesterday.strftime('%Y-%m-%d')
+
+            today = datetime.now()
+            # Calculate the number of days to subtract to get to Monday
+            # weekday() returns 0 for Monday, 1 for Tuesday, and so on
+            days_to_subtract = today.weekday()
+            monday = today - timedelta(days=days_to_subtract)
+            formatted_monday = monday.strftime('%Y-%m-%d')
+            from_date = formatted_monday
+            end_date = datetime.now().strftime('%Y-%m-%d')
+
+            user = await get_user(from_date, end_date, formatted_yesterday, info)
+            # user = await get_user(from_date, formatted_yesterday, (datetime.now() - timedelta(days=2)).strftime('%Y-%m-%d'), info)
+            return await send_table_user_config_image(user), message_id
+
+
         elif detect_member_info_os_bet(processed):
             if check_time_and_send_notification():
                 return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''

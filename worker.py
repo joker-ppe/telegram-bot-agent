@@ -33,7 +33,7 @@ async def get_user(from_date, end_date, yesterday, user_name):
     url += f'startDate={from_date}&endDate={end_date}&yesterday={yesterday}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -64,7 +64,7 @@ async def get_user_os_bet(end_date, user_name):
     url += f'endDate={end_date}&userName={user_name}'
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -105,7 +105,7 @@ async def get_supers(from_date, end_date):
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -120,7 +120,7 @@ async def get_masters(from_date, end_date):
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -135,7 +135,7 @@ async def get_agents(from_date, end_date):
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -150,7 +150,7 @@ async def get_members(from_date, end_date):
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
 
@@ -165,6 +165,6 @@ async def get_members_inactive(from_date, end_date):
     async with aiohttp.ClientSession() as session:
         response = await fetch_url(session, url)
         # print(response)
-        if (len(response) == 0):
+        if len(response) == 0:
             return '***'
         return response
