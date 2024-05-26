@@ -73,6 +73,12 @@ def detect_member_info(text):
     return detect_action(text, words)
 
 
+def detect_member_info_last_week(text):
+    words = ['thông tin tuần trước', 'thong tin tuan truoc', 'ttin tuan truoc', 'info last week', 'infor last week',
+             'info tuan truoc', 'infor tuan truoc', 'info tuần trước', 'infor tuần trước']
+    return detect_action(text, words)
+
+
 def detect_member_config(text):
     words = ['config', 'cấu hình', 'cau hinh']
     return detect_action(text, words)

@@ -235,7 +235,19 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
         info = text_full[0].strip().lower()
         processed: str = text.replace(info, '').lower().strip()
 
-        if detect_member_info_text(processed):
+        if detect_member_info_last_week(processed):
+            if check_time_and_send_notification():
+                return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''
+            else:
+                message_to_delete = await context.bot.send_message(chat_id,
+                                                                   f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
+                message_id = message_to_delete.message_id
+
+            user = await get_user_last_week(info)
+
+            return await send_table_user_image(user), message_id
+
+        elif detect_member_info_text(processed):
             if check_time_and_send_notification():
                 return 'Đang tính toán dữ liệu hôm nay. Sếp vui lòng nhắn sau 18:41 nhé ạ.', ''
             else:
