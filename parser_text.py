@@ -489,13 +489,13 @@ async def send_table_user_config_image(json_data):
 async def send_table_user_os_bet_image(json_data):
     # print(json_data)
 
-    if (json_data == "***"):
-        return "Không tìm thấy thông tin. Anh vui lòng kiểm tra và thử lại."
+    if json_data == "***":
+        return "Không tìm thấy thông tin. Sếp vui lòng kiểm tra và thử lại."
 
     if int(json_data['level']) != 5:
         return f"Tài khoản {json_data['full_name']} không phải là Hội viên. Vui lòng kiểm tra lại."
 
-    if (len(json_data['data']) == 0):
+    if len(json_data['data']) == 0:
         return f"Tài khoản {json_data['full_name']} không có dữ liệu Outstanding hôm nay."
 
     # Xây dựng bảng HTML
@@ -525,7 +525,7 @@ async def send_table_user_os_bet_image(json_data):
       table {
           margin-left: auto;
           margin-right: auto;
-          font-size: 20px;
+          font-size: 15px;
           table-layout: auto;
           width: 100%;  
         }
@@ -555,7 +555,7 @@ async def send_table_user_os_bet_image(json_data):
     else:
         profit = json_data['profit']
         class_name = 'lose'
-        if (profit > 0):
+        if profit > 0:
             class_name = 'win'
         html_table += f"<caption style='font-size: 35px; margin-bottom: 10px;'>Lợi nhuận {json_data['full_name']} hôm nay: <span class='{class_name}'>{profit:,}</span></caption>"
 
@@ -572,12 +572,20 @@ async def send_table_user_os_bet_image(json_data):
         number = " ".join(str(x) for x in item['number'])
         game_name = get_type_game(int(item['bet_type']))
 
+        max_number = 0
+        max_bet = 0
+
+        for i in json_data['config']:
+            if i['bet_type'] == item['bet_type']:
+                max_number = i['max_point_per_number']
+                max_bet = i['max_point_per_bet']
+                break
+
         profit_item = 0
         if int(item['status']) == 1:
             profit_item = item['payout'] - item['amount']
 
         total_profit += profit_item
-
         total_payout += item['payout']
         total_points += item['point']
         total_amount += item['amount']
@@ -589,9 +597,19 @@ async def send_table_user_os_bet_image(json_data):
         html_table += f"""
     <tr>
         <td style='text-align: left;'>{index}</td>
-        <td style='text-align: left;'>{game_name}</td>
-        <td style='text-align: center;'>{number}</td>
-        <td style='text-align: right;'>{item['point']:,}</td>
+        <td style='text-align: left;'>
+            {game_name}<br/><br/>
+            Tổng số: {len(item['number'])}<br/>
+            Điểm / số: ~{int(item['point'] / len(item['number']))}
+        </td>
+        <td style='text-align: center;'>
+            {number}
+        </td>
+        <td style='text-align: right;'>
+            {item['point']:,}<br/><br/>
+            Max 1 số: {max_number:,}<br/>
+            Max 1 cược: {max_bet:,}
+        </td>
         <td style='text-align: right;'>{item['amount']:,}</td>
         <td style='text-align: right;'>{item['payout']:,}</td>
         <td class='{class_name_item}' style='text-align: right;'>{profit_item:,}</td>
