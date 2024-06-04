@@ -577,7 +577,7 @@ async def send_table_user_os_bet_image(json_data):
 
         for i in json_data['config']:
             if i['bet_type'] == item['bet_type']:
-                max_number = i['max_point_per_number']
+                max_number = i['total_point_per_user']
                 max_bet = i['max_point_per_bet']
                 break
 
