@@ -138,7 +138,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
                                                                f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
             message_id = message_to_delete.message_id
 
-        supers = await get_supers(from_date, end_date)
+        supers = await get_supers(from_date, end_date, True)
         return await send_table_os_image(supers, 'Cổ Đông'), message_id
     elif detect_os_master(text_full):
         if check_time_and_send_notification():
@@ -148,7 +148,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
                                                                f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
             message_id = message_to_delete.message_id
 
-        masters = await get_masters(from_date, end_date)
+        masters = await get_masters(from_date, end_date, True)
         return await send_table_os_image(masters, 'Tổng Đại Lý'), message_id
     elif detect_os_agent(text_full):
         if check_time_and_send_notification():
@@ -158,7 +158,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
                                                                f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
             message_id = message_to_delete.message_id
 
-        agents = await get_agents(from_date, end_date)
+        agents = await get_agents(from_date, end_date, True)
         return await send_table_os_image(agents, 'Đại Lý'), message_id
     elif detect_os_member(text_full):
         if check_time_and_send_notification():
@@ -168,7 +168,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
                                                                f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
             message_id = message_to_delete.message_id
 
-        members = await get_members(from_date, end_date)
+        members = await get_members(from_date, end_date, True)
         return await send_table_os_image(members, 'Hội Viên'), message_id
     elif detect_super(text_full):
         if check_time_and_send_notification():
@@ -178,7 +178,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
                                                                f'Đang tổng hợp dữ liệu. Sếp {full_name} đợi em chút nhé')
             message_id = message_to_delete.message_id
 
-        supers = await get_supers(from_date, end_date)
+        supers = await get_supers(from_date, end_date, False)
         tmp_text = text_full.split(' ')
         threshold = 0
         if len(tmp_text) > 0:
@@ -196,7 +196,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text) - 1]
-        masters = await get_masters(from_date, end_date)
+        masters = await get_masters(from_date, end_date, False)
         # masters = await get_masters('2024-05-13', '2024-05-19')
         return await send_table_image(masters, time_text, 'Tổng Đại Lý', threshold), message_id
     elif detect_agent(text_full):
@@ -211,7 +211,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text) - 1]
-        agents = await get_agents(from_date, end_date)
+        agents = await get_agents(from_date, end_date, False)
         return await send_table_image(agents, time_text, 'Đại Lý', threshold), message_id
     elif detect_member(text_full):
         if check_time_and_send_notification():
@@ -225,7 +225,7 @@ async def handle_response(context: ContextTypes.DEFAULT_TYPE, chat_id: int, full
         tmp_text = text_full.split(' ')
         if len(tmp_text) > 0:
             threshold = tmp_text[len(tmp_text) - 1]
-        members = await get_members(from_date, end_date)
+        members = await get_members(from_date, end_date, False)
         return await send_table_image(members, time_text, 'Hội Viên', threshold), message_id
     else:
         text_full = text_full.split(' ')
