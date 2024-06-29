@@ -69,7 +69,7 @@ async def send_notification_message(app: ContextTypes.DEFAULT_TYPE):
     from_date = datetime.now().strftime('%Y-%m-%d')
     end_date = from_date
 
-    masters = await get_masters(from_date, end_date)
+    masters = await get_masters(from_date, end_date, False)
     response = await send_table_image(masters, 'hôm nay', 'Tổng Đại Lý')
     message_id = random.randint(1, 1000)
 
